@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spot the Finding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Stencil+One&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Spot the Finding</h1>
+    <p class="sub">An internal audit walk. Click every nonconformance you'd write up.</p>
+  </header>
+
+  <!-- Pick an area to audit -->
+  <section id="selectScreen" class="select-screen">
+    <h2 class="select-title">Choose an area to audit</h2>
+    <div id="areaList" class="area-list"></div>
+  </section>
+
+  <main id="auditScreen" class="layout hidden">
+    <!-- The scene -->
+    <section class="scene-panel">
+      <div class="scene-bar">
+        <span><button id="areasBtn" class="link-btn">← Areas</button> <span id="sceneTitle" class="scene-title"></span></span>
+        <span class="stats">
+          <span>⏱ <b id="timer">1:30</b></span>
+          <span>Findings <b id="foundCount">0</b>/<span id="totalCount">0</span></span>
+          <span>Score <b id="score">0</b></span>
+        </span>
+      </div>
+
+      <div id="sceneWrap" class="scene-wrap">
+        <div id="scene" class="scene"></div>
+
+        <!-- The magnifying glass: a zoomed copy of the scene inside a circle -->
+        <div id="loupe" class="loupe hidden"><div id="loupeInner" class="loupe-inner"></div></div>
+
+        <!-- Shown before the audit starts -->
+        <div id="startCover" class="cover">
+          <div class="cover-card">
+            <h2>Ready to audit?</h2>
+            <p>You have <b id="startSeconds">90</b> seconds to find every nonconformance in this area.</p>
+            <ul>
+              <li><b>+100</b> for each real finding</li>
+              <li><b>−50</b> for writing up something that's actually compliant</li>
+              <li><b>−10</b> for clicking empty space (no guessing!)</li>
+              <li><b>+5</b> per second left if you find them all</li>
+            </ul>
+            <button id="startBtn" class="primary">▶ Start the audit</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="tools">
+        <button id="loupeBtn" class="tool" title="Shortcut: Z">🔍 Magnifier: <b id="loupeState">off</b></button>
+        <button id="finishBtn" class="tool">✔ Finish the audit</button>
+      </div>
+      <p id="message" class="message">Look closely. Some things that look wrong are actually fine.</p>
+    </section>
+
+    <!-- The auditor's clipboard: findings written up so far -->
+    <aside class="clipboard">
+      <div class="clip"></div>
+      <h2>Audit findings</h2>
+      <p id="auditMeta" class="audit-meta"></p>
+      <ol id="findingList" class="finding-list"></ol>
+      <p id="emptyList" class="empty">No findings written up yet.</p>
+    </aside>
+  </main>
+
+  <!-- End-of-audit report -->
+  <div id="report" class="report hidden">
+    <div class="report-card">
+      <div id="grade" class="grade">A</div>
+      <h2>Audit report</h2>
+      <p id="reportScore" class="report-score"></p>
+      <div id="reportBody"></div>
+      <div class="report-buttons">
+        <button id="againBtn" class="primary">↻ Audit again</button>
+        <button id="reviewBtn">Review the scene</button>
+        <button id="otherAreaBtn">Choose another area</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="scenes.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
